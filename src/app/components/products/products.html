@@ -1,0 +1,68 @@
+<div class="container">
+
+  <!-- PRODUITS -->
+  <div class="card">
+    <h2>Produits disponibles</h2>
+
+    <table>
+      <thead>
+        <tr>
+          <th>Produit</th>
+          <th>Prix</th>
+          <th>Action</th>
+        </tr>
+      </thead>
+
+      <tbody>
+        <tr *ngFor="let p of products">
+          <td>{{ p.name }}</td>
+          <td>
+            <span class="badge badge-price">{{ p.price }} DH</span>
+          </td>
+          <td>
+            <button class="btn-add" (click)="addToInvoice(p)">
+              + Ajouter
+            </button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- FACTURE -->
+  <div class="card" *ngIf="invoice.length > 0">
+    <h2>Facture</h2>
+
+    <table>
+      <thead>
+        <tr>
+          <th>Produit</th>
+          <th>Prix</th>
+          <th>Qté</th>
+          <th>Total</th>
+          <th></th>
+        </tr>
+      </thead>
+
+      <tbody>
+        <tr *ngFor="let item of invoice">
+          <td>{{ item.product.name }}</td>
+          <td>{{ item.product.price }} DH</td>
+          <td>{{ item.quantity }}</td>
+          <td>{{ item.product.price * item.quantity }} DH</td>
+          <td>
+            <button class="btn-delete" (click)="remove(item)">X</button>
+          </td>
+        </tr>
+
+        <tr class="total-row">
+          <td colspan="3">Total Général</td>
+          <td colspan="2" class="total-amount">
+            {{ getTotal() }} DH
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+</div>
